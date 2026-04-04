@@ -1,0 +1,335 @@
+PAGES=12
+
+--- PAGE 1 ---
+
+Mentoria  Backend  com  Python  Projeto  HelpDesk  Hub  API  
+Bem-vindos  à  mentoria  
+Durante  as  próximas  11  semanas,  vocês  irão  construir  uma  aplicação  backend  realista  
+chamada
+ 
+HelpDesk
+ 
+Hub
+ 
+API
+.
+ 
+Essa  aplicação  representa  um  sistema  de  abertura  e  gestão  de  chamados  internos  de  
+suporte,
+ 
+como
+ 
+acontece
+ 
+em
+ 
+empresas
+ 
+que
+ 
+precisam
+ 
+controlar
+ 
+solicitações
+ 
+de
+ 
+TI,
+ 
+acesso
+ 
+a
+ 
+sistemas,
+ 
+problemas
+ 
+operacionais
+ 
+e
+ 
+atendimento
+ 
+interno.
+ 
+Ao  longo  da  mentoria,  vocês  não  vão  construir  apenas  um  CRUD.  
+Vocês
+ 
+vão
+ 
+começar
+ 
+simples
+ 
+e
+ 
+evoluir
+ 
+o
+ 
+projeto
+ 
+até
+ 
+chegar
+ 
+a
+ 
+uma
+ 
+API
+ 
+com
+ 
+características
+ 
+profissionais.
+ 
+O  que  vocês  vão  aprender  
+Durante  a  mentoria  para  este  projeto,  vocês  vão  praticar:  
+●  Python  aplicado  ao  backend  ●  FastAPI  ●  HTTP  e  JSON  ●  validação  com  Pydantic  ●  CRUD  em  memória  ●  banco  de  dados  PostgreSQL  ●  ORM  com  SQLAlchemy  ●  migrações  com  Alembic  ●  autenticação  com  JWT  ●  cadastro  e  login  ●  variáveis  de  ambiente  ●  testes  ●  logs  ●  Docker  ●  CI  com  GitHub  Actions  ●  health  check  ●  métricas  ●  cache  ●  tarefas  em  background  ●  integração  com  API  externa  ●  endpoint  com  IA  simulada  ●  organização  profissional  de  projeto  
+
+--- PAGE 2 ---
+
+O  projeto  que  vocês  vão  construir  
+O  sistema  terá  funcionalidades  como:  
+●  cadastrar  utilizadores  ●  fazer  login  ●  criar  chamados  ●  listar  chamados  ●  filtrar  chamados  ●  comentar  em  chamados  ●  atribuir  chamados  a  responsáveis  ●  mudar  status  ●  registrar  histórico  ●  expor  métricas  ●  disparar  automações  simples  ●  sugerir  classificação  com  IA  simulada  
+Como  vamos  trabalhar  
+A  construção  será  incremental.  
+Isso  significa  que  vocês  vão:  
+●  primeiro  fazer  funcionar  com  dados  em  memória  ●  depois  organizar  melhor  o  código  ●  depois  adicionar  banco  de  dados  ●  depois  proteger  a  aplicação  com  autenticação  ●  depois  adicionar  testes  e  logs  ●  depois  operar  a  aplicação  como  um  projeto  real  
+Vocês  não  precisam  saber  tudo  agora.  
+Cada
+ 
+semana
+ 
+vai
+ 
+adicionar
+ 
+uma
+ 
+nova
+ 
+camada
+ 
+de
+ 
+maturidade
+ 
+ao
+ 
+sistema.
+ 
+ 
+Bibliotecas  que  vamos  usar  
+FastAPI  
+Framework  para  criar  APIs  em  Python  com  rapidez  e  organização.  
+Instalação:  
+uv  add  fastapi  
+
+--- PAGE 3 ---
+
+Uvicorn  
+Servidor  que  executa  a  aplicação  FastAPI.  
+Instalação:  
+uv  add  uvicorn  
+Pydantic  
+Valida  e  organiza  os  dados  que  entram  e  saem  da  API.  
+Instalação:  
+uv  add  pydantic  
+python-dotenv  
+Permite  ler  variáveis  de  ambiente  de  um  arquivo  .env.  
+Instalação:  
+uv  add  python-dotenv  
+SQLAlchemy  
+Ferramenta  que  ajuda  a  trabalhar  com  banco  de  dados  usando  Python.  
+Instalação:  
+uv  add  sqlalchemy  
+psycopg  
+Driver  de  conexão  com  PostgreSQL.  
+Instalação:  
+uv  add  "psycopg[binary]"  
+Alembic  
+Ferramenta  para  criar  e  controlar  migrações  do  banco.  
+Instalação:  
+
+--- PAGE 4 ---
+
+uv  add  alembic  
+python-jose  
+Usada  para  gerar  e  validar  JWT.  
+Instalação:  
+uv  add  "python-jose[cryptography]"  
+passlib  
+Usada  para  gerar  hash  seguro  de  senhas.  
+Instalação:  
+uv  add  "passlib[bcrypt]"  
+pytest  
+Usada  para  escrever  testes  automatizados.  
+Instalação:  
+uv  add  --dev  pytest  
+httpx  
+Usada  para  consumir  APIs  externas.  
+Instalação:  
+uv  add  httpx  
+Loguru  
+Usada  para  criar  logs  mais  claros  e  organizados.  
+Instalação:  
+uv  add  loguru   
+
+--- PAGE 5 ---
+
+O  que  vocês  devem  construir  semana  a  
+semana
+ 
+Semana  1  
+Objetivo  
+Preparar  o  ambiente  e  entender  o  projeto.  
+Vocês  devem  fazer  
+●  criar  o  repositório  ●  configurar  o  projeto  com  uv  ●  instalar  dependências  iniciais  ●  criar  a  aplicação  FastAPI  ●  criar  a  rota  /  ●  criar  a  rota  /health  ●  entender  Swagger  e  documentação  automática  
+Entrega  esperada  
+●  projeto  rodando  localmente  ●  estrutura  inicial  criada  ●  rotas  básicas  funcionando  
+ 
+Semana  2  
+Objetivo  
+Começar  o  domínio  do  projeto  com  CRUD  em  memória.  
+Vocês  devem  fazer  
+●  criar  schemas  com  Pydantic  ●  criar  categorias  em  memória  ●  criar  tickets  em  memória  ●  implementar:  ○  POST  /tickets  ○  GET  /tickets  ○  GET  /tickets/{id}  ○  PATCH  /tickets/{id}  
+
+--- PAGE 6 ---
+
+○  GET  /categories  
+Entrega  esperada  
+●  CRUD  inicial  funcional  ●  validação  de  entrada  funcionando  
+ 
+Semana  3  
+Objetivo  
+Organizar  melhor  o  projeto  e  adicionar  comentários  e  filtros.  
+Vocês  devem  fazer  
+●  criar  comentários  ●  implementar  POST  /tickets/{id}/comments  ●  criar  filtros  por  status,  prioridade  e  categoria  ●  criar  paginação  simples  ●  separar:  ○  routers  ○  schemas  ○  services  ○  repositories  ●  criar  tratamento  básico  de  erros  
+Entrega  esperada  
+●  projeto  mais  organizado  ●  comentários  funcionando  ●  filtros  funcionando  
+ 
+Semana  4  
+Objetivo  
+Levar  a  aplicação  para  o  banco  de  dados.  
+Vocês  devem  fazer  
+●  configurar  PostgreSQL  ●  configurar  .env  
+
+--- PAGE 7 ---
+
+●  criar  models  com  SQLAlchemy  ●  persistir:  ○  categorias  ○  tickets  ○  comentários  
+Entrega  esperada  
+●  dados  persistidos  em  banco  ●  CRUD  funcionando  com  banco  real  
+ 
+Semana  5  
+Objetivo  
+Adicionar  migrações  e  preparar  a  autenticação.  
+Vocês  devem  fazer  
+●  configurar  Alembic  ●  criar  migration  inicial  ●  criar  model  de  utilizador  ●  criar  hash  de  senha  ●  criar  seed  de  categorias  ●  preparar  schemas  de  autenticação  
+Entrega  esperada  
+●  migrations  funcionando  ●  model  User  criado  ●  base  pronta  para  login  e  cadastro  
+ 
+Semana  6  
+Objetivo  
+Implementar  autenticação  e  autorização  inicial.  
+Vocês  devem  fazer  
+●  criar  endpoint  de  cadastro  ●  criar  endpoint  de  login  ●  gerar  JWT  
+
+--- PAGE 8 ---
+
+●  proteger  endpoints  ●  criar  roles:  ○  employee  ○  agent  ○  admin  ●  criar  GET  /users/me  
+Entrega  esperada  
+●  login  funcional  ●  endpoints  protegidos  ●  autenticação  integrada  ao  projeto  
+ 
+Semana  7  
+Objetivo  
+Adicionar  regras  reais  de  negócio.  
+Vocês  devem  fazer  
+●  permitir  atribuição  de  tickets  ●  permitir  mudança  de  status  ●  controlar  transições  válidas  ●  exigir  resolução  para  fechar  ticket  ●  criar  histórico  de  alterações  ●  melhorar  filtros  e  paginação  
+Entrega  esperada  
+●  sistema  mais  próximo  de  uma  aplicação  real  ●  histórico  funcional  ●  regras  de  negócio  implementadas  
+ 
+Semana  8  
+Objetivo  
+Adicionar  testes.  
+Vocês  devem  fazer  
+
+--- PAGE 9 ---
+
+●  configurar  pytest  ●  criar  testes  unitários  ●  criar  testes  de  integração  ●  testar:  ○  criação  de  ticket  ○  autenticação  ○  mudança  de  status  ○  autorização  
+Entrega  esperada  
+●  suíte  de  testes  inicial  ●  principais  fluxos  cobertos  
+ 
+Semana  9  
+Objetivo  
+Profissionalizar  a  execução  e  entrega  do  projeto.  
+Vocês  devem  fazer  
+●  adicionar  logs  com  Loguru  ●  criar  tratamento  global  de  exceptions  ●  criar  Dockerfile  ●  criar  Docker  Compose  ●  garantir  health  check  ●  criar  pipeline  de  CI  com  GitHub  Actions  
+Entrega  esperada  
+●  aplicação  dockerizada  ●  logs  úteis  ●  CI  executando  testes  
+ 
+Semana  10  
+Objetivo  
+Adicionar  recursos  de  backend  mais  avançados.  
+Vocês  devem  fazer  
+
+--- PAGE 10 ---
+
+●  expor  métricas  ●  criar  cache  simples  ●  criar  background  task  ●  integrar  com  API  externa  usando  httpx  ●  disparar  notificação  simulada  para  tickets  urgentes  
+Entrega  esperada  
+●  métricas  expostas  ●  integração  externa  funcionando  ●  background  task  executando  
+ 
+Semana  11  
+Objetivo  
+Finalizar  o  projeto  e  deixá-lo  forte  para  portfólio.  
+Vocês  devem  fazer  
+●  criar  endpoint  de  IA  simulada  ●  sugerir  categoria/prioridade/resumo  ●  revisar  arquitetura  ●  limpar  código  ●  melhorar  README  ●  documentar  melhorias  futuras  
+Entrega  esperada  
+●  projeto  final  completo  ●  README  forte  ●  projeto  pronto  para  apresentação  e  portfólio  
+ 
+O  que  será  avaliado  em  vocês  
+Durante  a  mentoria,  vocês  serão  avaliados  por:  
+entendimento  
+Se  vocês  compreendem  o  que  estão  implementando.  
+
+--- PAGE 11 ---
+
+execução  
+Se  a  funcionalidade  realmente  funciona.  
+organização  
+Se  o  projeto  está  estruturado  de  forma  legível.  
+qualidade  
+Se  existem  validações,  tratamento  de  erro,  testes  e  segurança.  
+evolução  
+Se  vocês  conseguem  fazer  o  projeto  crescer  sem  bagunçar  tudo.  
+autonomia  
+Se  conseguem  investigar  erros,  buscar  documentação  e  explicar  decisões.  
+ 
+Resultado  final  esperado  de  vocês  
+Ao  final  da  mentoria,  vocês  deverão  ter  um  projeto  que  mostre  que  já  conseguem  construir  
+uma
+ 
+API
+ 
+backend
+ 
+real
+ 
+com:
+ 
+●  FastAPI  ●  PostgreSQL  ●  SQLAlchemy  ●  Alembic  ●  autenticação  JWT  ●  testes  ●  logs  ●  Docker  ●  CI  ●  métricas  ●  integração  externa  ●  IA  simulada  
+Esse  projeto  será  uma  peça  real  de  portfólio.  
+ 
+
+--- PAGE 12 ---
+
+Recomendação  final  aos  mentorados  
+Não  tentem  entender  tudo  de  uma  vez.  
+O  objetivo  da  mentoria  é  justamente  fazer  vocês  crescerem  por  etapas.  
+O  importante  é  seguir  esta  ordem  mental:  
+●  primeiro  entender  ●  depois  implementar  ●  depois  organizar  ●  depois  refatorar  ●  depois  profissionalizar  
+É  assim  que  projetos  reais  costumam  evoluir.  
+ 
