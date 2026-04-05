@@ -46,6 +46,36 @@ Ao escrever specs para este projeto, prefira sempre conectar cada feature a pelo
 - aumentar a confiabilidade tecnica da aplicacao
 - profissionalizar a entrega para nivel de portfolio
 
+## Diretrizes de Engenharia
+
+Estas diretrizes valem para todo o projeto, nao apenas para features isoladas.
+
+- A arquitetura do projeto deve seguir `Clean Architecture`.
+- As implementacoes devem respeitar os principios `SOLID`.
+- O codigo deve buscar `DRY`, evitando duplicacao desnecessaria.
+- Prefira `guard clauses` para deixar fluxos mais claros e reduzir aninhamentos.
+- Utilize `middlewares` quando a responsabilidade for transversal, como logging, autenticacao, correlacao de requests e tratamento global de comportamento HTTP.
+- Aplique `design patterns` quando eles simplificarem a manutencao, a extensibilidade e a clareza do dominio.
+- Priorize separacao de responsabilidades, baixo acoplamento e alta coesao.
+- Toda decisao tecnica deve favorecer legibilidade, testabilidade, manutenibilidade e evolucao segura.
+- Evite complexidade acidental: padroes e abstractions devem existir para resolver problemas reais, nao por excesso de arquitetura.
+
+## Como Aplicar essas Diretrizes nas Specs
+
+O documento central define a regra geral, mas cada feature deve refletir isso quando for relevante.
+
+Ao escrever ou revisar uma feature, registre explicitamente:
+
+- como ela respeita a `Clean Architecture`
+- quais responsabilidades ficam em cada camada
+- onde `SOLID` influencia a modelagem da solucao
+- se existe risco de violar `DRY`
+- onde `guard clauses` ajudam a clareza do fluxo
+- se ha necessidade de `middlewares`
+- quais `design patterns` fazem sentido e por que
+
+Se uma feature nao exigir um item especifico, nao e necessario forcá-lo. O importante e que a decisao esteja consciente, nao implicita.
+
 ## Principios de Evolucao do Projeto
 
 De acordo com o material base do projeto, a evolucao esperada segue esta ordem:
@@ -128,6 +158,7 @@ Atualize esta lista sempre que uma nova feature for iniciada.
 <!-- FEATURES_INDEX_START -->
 | F000 | Exemplo inicial | Draft | Manual | `docs/features/f000-exemplo-inicial.md` |
 | F001 | Configurar estrutura inicial do projeto com uv | Done | GitHub #1 | `docs/features/f001-setup-initial-api.md` |
+| F002 | Instalar FastAPI, Uvicorn e Pydantic | Done | GitHub #2 | `docs/features/f002-instalar-fastapi-uvicorn-pydantic.md` |
 <!-- FEATURES_INDEX_END -->
 
 ## Contexto das Features
@@ -150,6 +181,14 @@ Resumo curto das features registradas para facilitar navegacao, rastreabilidade 
 - Documento: `docs/features/f001-setup-initial-api.md`
 - Labels: `feature`, `setup`, `priority: high`, `week-1`
 - Resumo: Base inicial do projeto implementada com uv, pyproject.toml, estrutura src/, API FastAPI minima e testes iniciais passando.
+
+### F002 - Instalar FastAPI, Uvicorn e Pydantic
+
+- Status: `Done`
+- Origem: `GitHub #2`
+- Documento: `docs/features/f002-instalar-fastapi-uvicorn-pydantic.md`
+- Labels: `feature`, `setup`, `api`, `priority: high`, `week-1`
+- Resumo: Dependencias FastAPI, Uvicorn e Pydantic registradas no projeto, com schemas Pydantic aplicados nos contratos iniciais da API e testes passando.
 <!-- FEATURES_CONTEXT_END -->
 
 ## Convencoes de Nomenclatura
@@ -231,6 +270,8 @@ Ao preencher specs deste projeto, vale dar atencao especial a estes pontos:
 - Quando houver regra de negocio, documente transicoes validas, permissoes e restricoes.
 - Em features de infraestrutura, deixe explicito o impacto para o fluxo de negocio.
 - Reflita no documento se a feature esta criando fundacao ou comportamento final.
+- Verifique se a implementacao proposta preserva Clean Architecture, SOLID, DRY e baixo acoplamento.
+- Registre middlewares e patterns apenas quando houver ganho real de clareza, reaproveitamento ou controle transversal.
 
 ## Eixos de Especificacao para o HelpDesk Hub API
 
@@ -394,6 +435,8 @@ Exemplo de comando futuro:
 - dependencias conhecidas mapeadas
 - estrategia de validacao descrita
 - vinculo com GitHub registrado
+- impacto arquitetural avaliado
+- aderencia a Clean Architecture, SOLID, DRY e responsabilidades transversais revisada
 
 Para o `HelpDesk Hub API`, acrescente tambem esta validacao mental:
 
@@ -401,6 +444,7 @@ Para o `HelpDesk Hub API`, acrescente tambem esta validacao mental:
 - as regras de negocio do helpdesk ficaram explicitas
 - a seguranca exigida para o endpoint foi definida
 - o impacto em testes, logs e monitoracao foi considerado quando relevante
+- a distribuicao entre camadas, services, repositories, middlewares e patterns foi pensada de forma intencional
 
 ## Fonte de Contexto do Projeto
 
@@ -409,6 +453,8 @@ O contexto acima foi consolidado a partir do arquivo `Projeto HelpDesk Hub API -
 ## Observacoes Finais
 
 O objetivo desta estrutura nao e burocracia. A ideia e criar um sistema leve, repetivel e rastreavel para construir o projeto do inicio ao fim com mais clareza.
+
+
 
 
 

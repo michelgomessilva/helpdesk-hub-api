@@ -35,6 +35,10 @@ $content = $content.Replace("FXXX", $FeatureId.ToUpperInvariant())
 $content = $content.Replace("Nome da feature", $Title)
 $content = $content.Replace("- Criado em:", $quotedToday)
 $content = $content.Replace("- Atualizado em:", $quotedUpdatedToday)
+$content = Set-MarkdownSectionContent `
+    -Content $content `
+    -Heading "Diretrizes Arquiteturais" `
+    -SectionBody (Get-ArchitectureGuidelinesBlock)
 
 Set-Content -LiteralPath $targetPath -Value $content -Encoding UTF8
 

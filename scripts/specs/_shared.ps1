@@ -209,6 +209,33 @@ function Set-MarkdownSectionContent {
     return [regex]::Replace($Content, $pattern, ('$1' + $SectionBody.Trim() + "`r`n"), 1)
 }
 
+function Get-ArchitectureGuidelinesBlock {
+    param(
+        [string[]]$Labels = @()
+    )
+
+    $middlewareLine = "- Middlewares: Avaliar uso quando houver preocupacoes transversais como autenticacao, logging, observabilidade, tratamento global de erros ou correlacao de requests."
+    if ($Labels -contains "auth" -or $Labels -contains "ops" -or $Labels -contains "observability") {
+        $middlewareLine = "- Middlewares: Provavelmente relevantes nesta feature; explicitar responsabilidade transversal e evitar mistura com regra de negocio."
+    }
+
+    $patternLine = "- Design Patterns: Aplicar apenas quando simplificarem extensao, manutencao ou organizacao do dominio; evitar complexidade desnecessaria."
+    if ($Labels -contains "database" -or $Labels -contains "integration") {
+        $patternLine = "- Design Patterns: Avaliar uso de padroes como Repository, Strategy, Factory ou Adapter se ajudarem a isolar infraestrutura e reduzir acoplamento."
+    }
+
+    $lines = @(
+        "- Clean Architecture: Definir claramente responsabilidades entre dominio, aplicacao e infraestrutura, evitando acoplamento indevido entre camadas.",
+        "- SOLID: Garantir coesao, extensibilidade e separacao de responsabilidades nos componentes afetados.",
+        "- DRY: Evitar duplicacao de regras, validacoes e fluxos compartilhados.",
+        "- Guard Clauses: Preferir validacoes antecipadas para reduzir aninhamento e aumentar legibilidade.",
+        $middlewareLine,
+        $patternLine
+    )
+
+    return $lines -join "`r`n"
+}
+
 function Build-ImportedFeatureContent {
     param(
         [Parameter(Mandatory = $true)]
@@ -318,6 +345,7 @@ function Build-ImportedFeatureContent {
     $content = Set-MarkdownSectionContent -Content $content -Heading "Fora de Escopo" -SectionBody (Convert-ToBulletBlock -Items $nonScopeItems -Fallback "- Fora de escopo ainda nao explicitado na issue.")
     $content = Set-MarkdownSectionContent -Content $content -Heading "Contexto de Negocio" -SectionBody $labelsBlock
     $content = Set-MarkdownSectionContent -Content $content -Heading "Requisitos Funcionais" -SectionBody $functionalBlock
+    $content = Set-MarkdownSectionContent -Content $content -Heading "Diretrizes Arquiteturais" -SectionBody (Get-ArchitectureGuidelinesBlock -Labels $Labels)
     $content = Set-MarkdownSectionContent -Content $content -Heading "Criterios de Aceitacao" -SectionBody (Convert-ToAcceptanceCriteriaBlock -Items $acceptanceItems)
     $content = Set-MarkdownSectionContent -Content $content -Heading "Referencias" -SectionBody ("- Issue / Task: #$IssueNumber - $IssueUrl`r`n- PR:`r`n- Documentacao: docs/spec-driven-development.md")
     $content = Set-MarkdownSectionContent -Content $content -Heading "Historico de Decisoes" -SectionBody "- $Today - Spec criada automaticamente a partir da issue #$IssueNumber."

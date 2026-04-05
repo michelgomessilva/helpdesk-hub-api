@@ -51,6 +51,16 @@ Qual resultado esperamos alcancar com esta entrega?
 
 - RNF01:
 - RNF02:
+- RNF03: Como a feature respeita Clean Architecture, SOLID, DRY e testabilidade?
+
+## Diretrizes Arquiteturais
+
+- Clean Architecture:
+- SOLID:
+- DRY:
+- Guard Clauses:
+- Middlewares:
+- Design Patterns:
 
 ## Criterios de Aceitacao
 
@@ -79,6 +89,9 @@ Descreva o fluxo principal da feature.
 - Entidades envolvidas
 - APIs, filas, jobs ou integracoes
 - Migracoes ou mudancas de infraestrutura
+- Camadas afetadas na arquitetura
+- Necessidade de middlewares
+- Design patterns adotados ou descartados
 
 ## Estrategia de Implementacao
 
