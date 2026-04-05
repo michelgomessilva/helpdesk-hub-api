@@ -127,14 +127,14 @@ Esse roadmap nao obriga que as features sigam exatamente a divisao por semana, m
 
 Uma boa estrategia para este repositorio e dividir o trabalho em features pequenas e cumulativas, por exemplo:
 
-- `F001` Setup inicial da API
-- `F002` Health check e rota raiz
-- `F003` Cadastro e listagem de categorias
-- `F004` Criacao e consulta de tickets
-- `F005` Comentarios em tickets
-- `F006` Filtros e paginacao
-- `F007` Persistencia com PostgreSQL
-- `F008` Migrations com Alembic
+- `F001` Configuracao inicial do projeto com uv
+- `F002` Instalacao de FastAPI, Uvicorn e Pydantic
+- `F003` Criacao do ponto de entrada FastAPI
+- `F004` Endpoint raiz versionado da API
+- `F005` Health check versionado da API
+- `F006` README inicial do projeto
+- `F007` Enums de status e prioridade
+- `F008` Schemas de Ticket
 - `F009` Cadastro de utilizadores
 - `F010` Login com JWT
 - `F011` Roles e autorizacao
@@ -159,6 +159,12 @@ Atualize esta lista sempre que uma nova feature for iniciada.
 | F000 | Exemplo inicial | Draft | Manual | `docs/features/f000-exemplo-inicial.md` |
 | F001 | Configurar estrutura inicial do projeto com uv | Done | GitHub #1 | `docs/features/f001-setup-initial-api.md` |
 | F002 | Instalar FastAPI, Uvicorn e Pydantic | Done | GitHub #2 | `docs/features/f002-instalar-fastapi-uvicorn-pydantic.md` |
+| F003 | Criar arquivo main.py e aplicação FastAPI | Done | GitHub #3 | `docs/features/f003-create-main-fastapi.md` |
+| F004 | Criar endpoint raiz GET /api/v1/ | Done | GitHub #4 | `docs/features/f004-create-root-get.md` |
+| F005 | Criar endpoint GET /api/v1/health | Done | GitHub #5 | `docs/features/f005-create-health-endpoint.md` |
+| F006 | Criar README inicial do projeto | Done | GitHub #6 | `docs/features/f006-create-readme.md` |
+| F007 | Criar enums de status e prioridade | Done | GitHub #7 | `docs/features/f007-create-enums-status-priority.md` |
+| F008 | Criar schema de Ticket | Done | GitHub #9 | `docs/features/f008-create-schema-ticket.md` |
 <!-- FEATURES_INDEX_END -->
 
 ## Contexto das Features
@@ -189,6 +195,54 @@ Resumo curto das features registradas para facilitar navegacao, rastreabilidade 
 - Documento: `docs/features/f002-instalar-fastapi-uvicorn-pydantic.md`
 - Labels: `feature`, `setup`, `api`, `priority: high`, `week-1`
 - Resumo: Dependencias FastAPI, Uvicorn e Pydantic registradas no projeto, com schemas Pydantic aplicados nos contratos iniciais da API e testes passando.
+
+### F003 - Criar arquivo main.py e aplicação FastAPI
+
+- Status: `Done`
+- Origem: `GitHub #3`
+- Documento: `docs/features/f003-create-main-fastapi.md`
+- Labels: `feature`, `api`, `priority: high`, `week-1`
+- Resumo: Ponto de entrada da aplicacao consolidado com create_app(), instancia FastAPI e base de roteamento via APIRouter, validado com TDD.
+
+### F004 - Criar endpoint raiz GET /api/v1/
+
+- Status: `Done`
+- Origem: `GitHub #4`
+- Documento: `docs/features/f004-create-root-get.md`
+- Labels: `feature`, `api`, `priority: high`, `week-1`
+- Resumo: Endpoint raiz versionado da API entregue em GET /api/v1/, com resposta JSON simples, status 200 e cobertura por testes automatizados.
+
+### F005 - Criar endpoint GET /api/v1/health
+
+- Status: `Done`
+- Origem: `GitHub #5`
+- Documento: `docs/features/f005-create-health-endpoint.md`
+- Labels: `feature`, `api`, `priority: high`, `week-1`
+- Resumo: Endpoint de health check versionado entregue em GET /api/v1/health, com resposta JSON simples, status 200 e cobertura por testes automatizados.
+
+### F006 - Criar README inicial do projeto
+
+- Status: `Done`
+- Origem: `GitHub #6`
+- Documento: `docs/features/f006-create-readme.md`
+- Labels: `docs`, `docs-portfolio`, `priority: medium`, `week-1`
+- Resumo: README inicial entregue com nome do projeto, objetivo explicito, instrucoes reais de execucao local e validacao automatizada via TDD.
+
+### F007 - Criar enums de status e prioridade
+
+- Status: `Done`
+- Origem: `GitHub #7`
+- Documento: `docs/features/f007-create-enums-status-priority.md`
+- Labels: `feature`, `tickets`, `priority: high`, `week-2`
+- Resumo: Enums de status e prioridade criados na camada de dominio e aplicados a um schema inicial de ticket, com validacao automatica coberta por TDD.
+
+### F008 - Criar schema de Ticket
+
+- Status: `Done`
+- Origem: `GitHub #9`
+- Documento: `docs/features/f008-create-schema-ticket.md`
+- Labels: `feature`, `tickets`, `priority: high`, `week-2`
+- Resumo: Schemas TicketCreate e TicketResponse implementados com validacao de titulo, descricao, categoria, status e prioridade, cobertos por TDD.
 <!-- FEATURES_CONTEXT_END -->
 
 ## Convencoes de Nomenclatura
@@ -453,6 +507,18 @@ O contexto acima foi consolidado a partir do arquivo `Projeto HelpDesk Hub API -
 ## Observacoes Finais
 
 O objetivo desta estrutura nao e burocracia. A ideia e criar um sistema leve, repetivel e rastreavel para construir o projeto do inicio ao fim com mais clareza.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
