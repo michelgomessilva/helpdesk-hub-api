@@ -16,6 +16,7 @@ Implementar endpoint `GET /api/v1/categories` para listar todas as categorias. P
 ## Objetivo
 
 Entregar endpoint que:
+
 1. Recupera todas as categorias
 2. Converte para `CategoryResponse`
 3. Retorna HTTP 200 + array
@@ -25,6 +26,7 @@ Entregar endpoint que:
 ## Escopo
 
 ### Incluído
+
 - ✅ `ListCategoriesQuery`
 - ✅ Handler
 - ✅ Rota GET /api/v1/categories
@@ -32,6 +34,7 @@ Entregar endpoint que:
 - ✅ Testes
 
 ### Fora de Escopo
+
 - ❌ Filtros (futuro)
 - ❌ Paginação (futuro)
 
@@ -41,7 +44,7 @@ Entregar endpoint que:
 
 ```python
 @dataclass
-class ListCategoriesQuery(GenericRequest[list[Category]]):
+class ListCategoriesQuery(GenericQuery[list[Category]]):
     pass
 
 class ListCategoriesHandler:
@@ -53,12 +56,11 @@ class ListCategoriesHandler:
 ```
 
 **Rota:**
+
 ```python
 @router.get("/", response_model=list[CategoryResponse])
-async def list_categories(
-    repo: CategoryRepository = Depends(get_category_repository),
-) -> list[CategoryResponse]:
-    handler = ListCategoriesHandler(repo)
+async def list_categories() -> list[CategoryResponse]:
+    handler = ListCategoriesHandler(_category_repository)
     categories = await handler.handle(ListCategoriesQuery())
     return [CategoryResponse.model_validate(c) for c in categories]
 ```
@@ -81,14 +83,16 @@ async def list_categories(
 ## Cenários
 
 ### Lista Vazia
-```
+
+```http
 GET /api/v1/categories
 HTTP/1.1 200 OK
 []
 ```
 
 ### Com Categorias
-```
+
+```json
 GET /api/v1/categories
 HTTP/1.1 200 OK
 [
@@ -122,4 +126,8 @@ HTTP/1.1 200 OK
 
 ## Status
 
-**Status: DRAFT** — Pronta para review
+**Status: Done** — Implementado e testado
+
+- Todos os 8 critérios de aceitação implementados
+- 64 testes passando (unit + integration)
+- ListCategoriesQuery e handler implementados

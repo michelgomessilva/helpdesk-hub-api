@@ -232,6 +232,13 @@ Atualize esta lista sempre que uma nova feature for iniciada.
 | F007 | Criar enums de status e prioridade              | Done   | GitHub #7 | `docs/features/f007-create-enums-status-priority.md`  |
 | F008 | Criar schema de Ticket                          | Done   | GitHub #9  | `docs/features/f008-create-schema-ticket.md`          |
 | F009 | Criar armazenamento em memória para tickets | Done   | GitHub #11 | `docs/features/f009-create-storage-inmemory-tickets.md` |
+| F010 | Implementar POST /tickets | Draft | GitHub #13 | `docs/features/f010-create-endpoint-post-tickets.md` |
+| F011 | Implementar GET /tickets | Draft | GitHub #14 | `docs/features/f011-create-endpoint-get-tickets.md` |
+| F012 | Implementar GET /tickets/{id} | Draft | GitHub #15 | `docs/features/f012-create-endpoint-getbyid-tickets.md` |
+| F013 | Implementar PATCH /tickets/{id} | Draft | GitHub #16 | `docs/features/f013-create-endpoint-patch-tickets.md` |
+| F014 | Criar schema de Category | Draft | GitHub #8 | `docs/features/f014-create-schema-category.md` |
+| F015 | Criar armazenamento em memória para categorias | Draft | GitHub #10 | `docs/features/f015-create-storage-inmemory-categories.md` |
+| F016 | Implementar GET /categories | Draft | GitHub #12 | `docs/features/f016-create-endpoint-get-categories.md` |
 | ID   | Feature                                         | Status | Origem    | Documento                                             |
 <!-- FEATURES_INDEX_END -->
 
@@ -319,6 +326,62 @@ Resumo curto das features registradas para facilitar navegacao, rastreabilidade 
 - Documento: `docs/features/f009-create-storage-inmemory-tickets.md`
 - Labels: `feature`, `tickets`, `architecture`, `priority: high`, `week-2`
 - Resumo: Entidade Ticket implementada como dataclass no dominio. TicketRepository como ABC (contrato). InMemoryTicketRepository implementado na infraestrutura com geração de UUIDs e números sequenciais legíveis. Padrão Repository Pattern estabelecido. Todos os testes cobrindo F009 passando.
+
+### F010 - Implementar POST /tickets
+
+- Status: `Draft`
+- Origem: `GitHub #13`
+- Documento: `docs/features/f010-create-endpoint-post-tickets.md`
+- Labels: `feature`, `api`, `tickets`, `priority: high`, `week-2`
+- Resumo: ## Contexto Criar endpoint para abertura de chamados da HelpDesk Hub API. ## O que deve ser feito - [ ] Criar schema de entrada - [ ] Validar título, descrição, prioridade e categoria - [ ] Criar ticket em memória - [...
+
+### F011 - Implementar GET /tickets
+
+- Status: `Draft`
+- Origem: `GitHub #14`
+- Documento: `docs/features/f011-create-endpoint-get-tickets.md`
+- Labels: `feature`, `api`, `tickets`, `priority: high`, `week-2`
+- Resumo: ## Contexto Criar endpoint para listar todos os tickets cadastrados. ## O que deve ser feito - [ ] Criar rota GET /tickets - [ ] Retornar lista de tickets ## Critérios de aceite - [ ] Lista retornada corretamente - [ ...
+
+### F012 - Implementar GET /tickets/{id}
+
+- Status: `Draft`
+- Origem: `GitHub #15`
+- Documento: `docs/features/f012-create-endpoint-getbyid-tickets.md`
+- Labels: `feature`, `api`, `tickets`, `priority: high`, `week-2`
+- Resumo: ## Contexto Criar endpoint para consultar um ticket específico pelo id. ## O que deve ser feito - [ ] Criar rota GET /tickets/{id} - [ ] Buscar ticket por id - [ ] Retornar erro se não existir ## Critérios de aceite -...
+
+### F013 - Implementar PATCH /tickets/{id}
+
+- Status: `Draft`
+- Origem: `GitHub #16`
+- Documento: `docs/features/f013-create-endpoint-patch-tickets.md`
+- Labels: `feature`, `api`, `tickets`, `priority: high`, `week-2`
+- Resumo: ## Contexto Criar endpoint para atualização parcial do ticket. ## O que deve ser feito - [ ] Criar schema de atualização parcial - [ ] Permitir atualizar campos permitidos - [ ] Validar dados de entrada ## Critérios d...
+
+### F014 - Criar schema de Category
+
+- Status: `Draft`
+- Origem: `GitHub #8`
+- Documento: `docs/features/f014-create-schema-category.md`
+- Labels: `feature`, `categories`, `priority: medium`, `week-2`
+- Resumo: ## Contexto Criar schema da categoria para permitir listagem e vinculação aos tickets. ## O que deve ser feito - [ ] Criar schema de entrada ou saída conforme necessário - [ ] Definir campos essenciais da categoria ##...
+
+### F015 - Criar armazenamento em memória para categorias
+
+- Status: `Draft`
+- Origem: `GitHub #10`
+- Documento: `docs/features/f015-create-storage-inmemory-categories.md`
+- Labels: `feature`, `categories`, `priority: medium`, `week-2`
+- Resumo: ## Contexto Criar estrutura temporária em memória para armazenar categorias. ## O que deve ser feito - [ ] Definir lista ou dicionário de categorias - [ ] Popular categorias iniciais em memória ## Critérios de aceite ...
+
+### F016 - Implementar GET /categories
+
+- Status: `Draft`
+- Origem: `GitHub #12`
+- Documento: `docs/features/f016-create-endpoint-get-categories.md`
+- Labels: `feature`, `api`, `categories`, `priority: medium`, `week-2`
+- Resumo: ## Contexto Criar endpoint para listar categorias disponíveis. ## O que deve ser feito - [ ] Criar rota GET /categories - [ ] Retornar lista das categorias em memória ## Critérios de aceite - [ ] Endpoint responde cor...
 <!-- FEATURES_CONTEXT_END -->
 
 ## Convencoes de Nomenclatura
@@ -583,4 +646,11 @@ O contexto acima foi consolidado a partir do arquivo `Projeto HelpDesk Hub API -
 ## Observacoes Finais
 
 O objetivo desta estrutura nao e burocracia. A ideia e criar um sistema leve, repetivel e rastreavel para construir o projeto do inicio ao fim com mais clareza.
+
+
+
+
+
+
+
 

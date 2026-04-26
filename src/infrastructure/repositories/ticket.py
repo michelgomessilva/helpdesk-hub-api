@@ -1,5 +1,5 @@
 from datetime import datetime
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from domain.entities import Ticket
 from domain.repositories import TicketRepository
@@ -20,3 +20,6 @@ class InMemoryTicketRepository(TicketRepository):
 
     def list_all(self) -> list[Ticket]:
         return list(self._store.values())
+
+    def get_by_id(self, ticket_id: UUID) -> Ticket | None:
+        return self._store.get(ticket_id)

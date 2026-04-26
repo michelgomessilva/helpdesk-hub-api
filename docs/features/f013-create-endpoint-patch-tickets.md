@@ -53,10 +53,10 @@ Entregar endpoint que:
 
 ```python
 @dataclass
-class UpdateTicketCommand(GenericRequest[Ticket]):
+class UpdateTicketCommand(GenericQuery[Ticket | None]):
     ticket_id: UUID
-    status: str | None = None
-    priority: str | None = None
+    status: TicketStatus | None = None
+    priority: TicketPriority | None = None
     description: str | None = None
 
 class UpdateTicketHandler:
@@ -64,16 +64,15 @@ class UpdateTicketHandler:
         self._repo = repo
 
     async def handle(self, request: UpdateTicketCommand) -> Ticket | None:
-        tickets = self._repo.list_all()
-        ticket = next((t for t in tickets if t.id == request.ticket_id), None)
+        ticket = self._repo.get_by_id(request.ticket_id)
         if not ticket:
             return None
         
-        if request.status:
-            ticket.status = TicketStatus(request.status)
-        if request.priority:
-            ticket.priority = TicketPriority(request.priority)
-        if request.description:
+        if request.status is not None:
+            ticket.status = request.status
+        if request.priority is not None:
+            ticket.priority = request.priority
+        if request.description is not None:
             ticket.description = request.description
         
         return ticket
@@ -151,4 +150,8 @@ HTTP/1.1 404 Not Found
 
 ## Status
 
-**Status: DRAFT** — Pronta para review
+**Status: Done** — Implementado e testado
+
+- Todos os 12 critérios de aceitação implementados
+- 64 testes passando (unit + integration)
+- GenericQuery usado para commands e queries (mediatr library only exports GenericQuery)

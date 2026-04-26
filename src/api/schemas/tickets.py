@@ -14,6 +14,12 @@ class TicketCreate(BaseModel):
     priority: TicketPriority = TicketPriority.MEDIUM
 
 
+class TicketUpdate(BaseModel):
+    status: TicketStatus | None = None
+    priority: TicketPriority | None = None
+    description: str | None = Field(None, min_length=1, max_length=2000)
+
+
 class TicketResponse(BaseModel):
     id: UUID
     number: int
