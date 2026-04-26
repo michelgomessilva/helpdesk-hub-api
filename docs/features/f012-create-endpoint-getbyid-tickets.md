@@ -3,7 +3,7 @@
 ## Metadados
 
 - ID: `F012`
-- Status: `Draft`
+- Status: `Ready`
 - Criado em: `2026-04-26`
 - Origem no GitHub: #15
 

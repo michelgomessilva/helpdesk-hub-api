@@ -3,7 +3,7 @@
 ## Metadados
 
 - ID: `F011`
-- Status: `Draft`
+- Status: `Ready`
 - Criado em: `2026-04-26`
 - Origem no GitHub: #14 - https://github.com/michelgomessilva/helpdesk-hub-api/issues/14
 
