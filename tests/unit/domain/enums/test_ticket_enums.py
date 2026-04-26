@@ -3,7 +3,7 @@ from uuid import uuid4
 
 from pydantic import ValidationError
 
-from api.schemas.ticket import TicketCreate, TicketResponse
+from api.schemas.tickets import TicketCreate, TicketResponse
 
 
 def test_ticket_create_accepts_valid_status_and_priority_values() -> None:

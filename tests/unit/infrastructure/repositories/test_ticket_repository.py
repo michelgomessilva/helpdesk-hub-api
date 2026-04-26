@@ -1,8 +1,8 @@
 from uuid import UUID
 
 from domain.enums import TicketCategory, TicketPriority, TicketStatus
-from domain.ticket import Ticket
-from infrastructure.ticket_repository import InMemoryTicketRepository
+from domain.entities import Ticket
+from infrastructure.repositories import InMemoryTicketRepository
 
 
 def test_save_assigns_uuid_id() -> None:

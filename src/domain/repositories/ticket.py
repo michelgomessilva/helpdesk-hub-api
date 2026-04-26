@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from domain.ticket import Ticket
+from domain.entities import Ticket
 
 
 class TicketRepository(ABC):

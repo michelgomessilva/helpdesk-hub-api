@@ -1,8 +1,8 @@
 from datetime import datetime
 from uuid import uuid4
 
+from domain.entities import Ticket
 from domain.repositories import TicketRepository
-from domain.ticket import Ticket
 
 
 class InMemoryTicketRepository(TicketRepository):
