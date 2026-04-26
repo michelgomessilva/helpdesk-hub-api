@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import ValidationError
 
-from helpdesk_hub_api.schemas.ticket import TicketCreate, TicketResponse
+from api.schemas.ticket import TicketCreate, TicketResponse
 
 
 def test_ticket_create_accepts_valid_status_and_priority_values() -> None:

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from helpdesk_hub_api.api.routes import router as api_router
+from api.routes import router as api_router
 
 
 def create_app() -> FastAPI:

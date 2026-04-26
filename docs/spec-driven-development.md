@@ -97,6 +97,72 @@ No contexto de SDD, isso significa que as specs devem refletir maturidade increm
 5. Implementar seguindo a spec aprovada.
 6. Atualizar a spec com decisoes, ajustes e status final.
 
+## Workflow de Versionamento e Branches
+
+Este projeto segue um modelo de ramificacao claro para manter o historico de versoes organizado.
+
+### Padrão de Branches
+
+- **main**: Branch de producao, sempre estavel. Contem releases prontas.
+- **develop**: Branch de integracao contínua. Agrupa features completadas.
+- **feature/fNUMERO-slug**: Branch de feature individual.
+
+Exemplo: `feature/f008-create-schema-ticket`
+
+### Fluxo de Implementacao
+
+1. **Criar branch de feature:**
+
+```bash
+git checkout develop
+git pull origin develop
+git checkout -b feature/fNUMERO-SLUG
+```
+
+1. **Commits durante desenvolvimento:**
+
+- Use mensagens padronizadas: `[FNUMERO] descricao do commit`
+- Exemplo: `[F008] Add TicketCreate schema with validation`
+- Um commit por mudanca logica (atomicos)
+- Todos os testes devem passar antes de fazer push
+
+1. **Criar Pull Request:**
+
+- Titulo: `[FNUMERO] Nome descritivo da feature`
+- Exemplo: `[F008] Criar schema de Ticket`
+- **Apontar para `develop`**, nao para main
+- Descrever mudancas, criterios de aceitacao e validacoes
+- Referenciar a issue do GitHub: `closes #9`
+
+1. **Code Review e Merge:**
+
+- Requer aprovacao antes de merge
+- Usar **Squash and Merge** para manter historico limpo
+- Deixar mensagem de squash clara: `[FNUMERO] descricao completa`
+
+1. **Atualizacao da Spec:**
+
+- Adicionar link da PR: `- PR: #NUMERO`
+- Atualizar status para `Done`
+- Documentar decisoes finais
+
+### Release para Main
+
+Quando uma fase ou conjunto de features estiver pronto:
+
+1. Fazer merge de develop para main
+2. Criar tag de versao: `v0.1.0`, `v0.2.0`, etc
+3. Criar release note
+
+### Convencao de Slug para Branches
+
+- Use hifen para separar palavras
+- Mantenha curto e descritivo
+- Exemplos validos:
+  - `feature/f001-setup-uv`
+  - `feature/f008-create-schema-ticket`
+  - `feature/f010-jwt-authentication`
+
 ## Estrutura de Documentacao
 
 - Guia central: `docs/spec-driven-development.md`
@@ -153,18 +219,20 @@ Se uma feature estiver muito grande, quebre por fluxo, por agregado de dominio o
 
 Atualize esta lista sempre que uma nova feature for iniciada.
 
-| ID | Feature | Status | Origem | Documento |
-| --- | --- | --- | --- | --- |
 <!-- FEATURES_INDEX_START -->
-| F000 | Exemplo inicial | Draft | Manual | `docs/features/f000-exemplo-inicial.md` |
-| F001 | Configurar estrutura inicial do projeto com uv | Done | GitHub #1 | `docs/features/f001-setup-initial-api.md` |
-| F002 | Instalar FastAPI, Uvicorn e Pydantic | Done | GitHub #2 | `docs/features/f002-instalar-fastapi-uvicorn-pydantic.md` |
-| F003 | Criar arquivo main.py e aplicação FastAPI | Done | GitHub #3 | `docs/features/f003-create-main-fastapi.md` |
-| F004 | Criar endpoint raiz GET /api/v1/ | Done | GitHub #4 | `docs/features/f004-create-root-get.md` |
-| F005 | Criar endpoint GET /api/v1/health | Done | GitHub #5 | `docs/features/f005-create-health-endpoint.md` |
-| F006 | Criar README inicial do projeto | Done | GitHub #6 | `docs/features/f006-create-readme.md` |
-| F007 | Criar enums de status e prioridade | Done | GitHub #7 | `docs/features/f007-create-enums-status-priority.md` |
-| F008 | Criar schema de Ticket | Done | GitHub #9 | `docs/features/f008-create-schema-ticket.md` |
+
+| ID   | Feature                                         | Status | Origem    | Documento                                             |
+| ---- | ----------------------------------------------- | ------ | --------- | ----------------------------------------------------- |
+| F000 | Exemplo inicial                                 | Draft  | Manual    | `docs/features/f000-exemplo-inicial.md`               |
+| F001 | Configurar estrutura inicial com uv             | Done   | GitHub #1 | `docs/features/f001-setup-initial-api.md`             |
+| F002 | Instalar FastAPI, Uvicorn e Pydantic            | Done   | GitHub #2 | `docs/features/f002-instalar-fastapi-uvicorn-pydantic.md` |
+| F003 | Criar arquivo main.py e aplicação FastAPI       | Done   | GitHub #3 | `docs/features/f003-create-main-fastapi.md`           |
+| F004 | Criar endpoint raiz GET /api/v1/                | Done   | GitHub #4 | `docs/features/f004-create-root-get.md`               |
+| F005 | Criar endpoint GET /api/v1/health               | Done   | GitHub #5 | `docs/features/f005-create-health-endpoint.md`        |
+| F006 | Criar README inicial do projeto                 | Done   | GitHub #6 | `docs/features/f006-create-readme.md`                 |
+| F007 | Criar enums de status e prioridade              | Done   | GitHub #7 | `docs/features/f007-create-enums-status-priority.md`  |
+| F008 | Criar schema de Ticket                          | Done   | GitHub #9 | `docs/features/f008-create-schema-ticket.md`          |
+
 <!-- FEATURES_INDEX_END -->
 
 ## Contexto das Features
@@ -507,22 +575,3 @@ O contexto acima foi consolidado a partir do arquivo `Projeto HelpDesk Hub API -
 ## Observacoes Finais
 
 O objetivo desta estrutura nao e burocracia. A ideia e criar um sistema leve, repetivel e rastreavel para construir o projeto do inicio ao fim com mais clareza.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

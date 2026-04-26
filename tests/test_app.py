@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from helpdesk_hub_api.main import app, create_app
+from main import app, create_app
 
 
 client = TestClient(app)

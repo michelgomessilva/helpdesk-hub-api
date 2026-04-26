@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from helpdesk_hub_api.schemas.system import HealthResponse, RootResponse
+from api.schemas.system import HealthResponse, RootResponse
 
 
 router = APIRouter()

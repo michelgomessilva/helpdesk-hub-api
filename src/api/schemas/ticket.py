@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-from helpdesk_hub_api.domain.enums import TicketCategory, TicketPriority, TicketStatus
+from domain.enums import TicketCategory, TicketPriority, TicketStatus
 
 
 class TicketCreate(BaseModel):
