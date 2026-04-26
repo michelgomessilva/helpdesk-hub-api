@@ -56,6 +56,7 @@ Estas diretrizes valem para todo o projeto, nao apenas para features isoladas.
 - Prefira `guard clauses` para deixar fluxos mais claros e reduzir aninhamentos.
 - Utilize `middlewares` quando a responsabilidade for transversal, como logging, autenticacao, correlacao de requests e tratamento global de comportamento HTTP.
 - Aplique `design patterns` quando eles simplificarem a manutencao, a extensibilidade e a clareza do dominio.
+- **Application Layer com mediatr (CQRS)**: Commands para escrita, Queries para leitura. Organizacao vertical por feature. Handlers sao os unicos responsaveis pela logica de negocio.
 - Priorize separacao de responsabilidades, baixo acoplamento e alta coesao.
 - Toda decisao tecnica deve favorecer legibilidade, testabilidade, manutenibilidade e evolucao segura.
 - Evite complexidade acidental: padroes e abstractions devem existir para resolver problemas reais, nao por excesso de arquitetura.
@@ -94,8 +95,9 @@ No contexto de SDD, isso significa que as specs devem refletir maturidade increm
 2. Criar a spec da feature em `docs/features/`.
 3. Refinar escopo, regras de negocio, dependencias e criterios de aceitacao.
 4. Validar a spec antes de iniciar implementacao.
-5. Implementar seguindo a spec aprovada.
-6. Atualizar a spec com decisoes, ajustes e status final.
+5. **Criar o branch de feature** (`feature/fNNN-slug` a partir de `develop`) — **este e o primeiro passo tecnico obrigatorio, antes de qualquer ficheiro ser criado ou modificado**.
+6. Implementar seguindo a spec aprovada.
+7. Atualizar a spec com decisoes, ajustes e status final.
 
 ## Workflow de Versionamento e Branches
 
@@ -228,8 +230,8 @@ Atualize esta lista sempre que uma nova feature for iniciada.
 | F005 | Criar endpoint GET /api/v1/health               | Done   | GitHub #5 | `docs/features/f005-create-health-endpoint.md`        |
 | F006 | Criar README inicial do projeto                 | Done   | GitHub #6 | `docs/features/f006-create-readme.md`                 |
 | F007 | Criar enums de status e prioridade              | Done   | GitHub #7 | `docs/features/f007-create-enums-status-priority.md`  |
-| F008 | Criar schema de Ticket                          | Done   | GitHub #9 | `docs/features/f008-create-schema-ticket.md`          |
-| F009 | Criar armazenamento em memória para tickets | Draft | GitHub #11 | `docs/features/f009-create-storage-inmemory-tickets.md` |
+| F008 | Criar schema de Ticket                          | Done   | GitHub #9  | `docs/features/f008-create-schema-ticket.md`          |
+| F009 | Criar armazenamento em memória para tickets | Done   | GitHub #11 | `docs/features/f009-create-storage-inmemory-tickets.md` |
 | ID   | Feature                                         | Status | Origem    | Documento                                             |
 <!-- FEATURES_INDEX_END -->
 
@@ -312,11 +314,11 @@ Resumo curto das features registradas para facilitar navegacao, rastreabilidade 
 
 ### F009 - Criar armazenamento em memória para tickets
 
-- Status: `Draft`
+- Status: `Done`
 - Origem: `GitHub #11`
 - Documento: `docs/features/f009-create-storage-inmemory-tickets.md`
-- Labels: `feature`, `tickets`, `priority: high`, `week-2`
-- Resumo: ## Contexto Criar estrutura temporária em memória para armazenar tickets. ## O que deve ser feito - [ ] Definir lista ou dicionário de tickets - [ ] Garantir geração simples de ids ## Critérios de aceite - [ ] Tickets...
+- Labels: `feature`, `tickets`, `architecture`, `priority: high`, `week-2`
+- Resumo: Entidade Ticket implementada como dataclass no dominio. TicketRepository como ABC (contrato). InMemoryTicketRepository implementado na infraestrutura com geração de UUIDs e números sequenciais legíveis. Padrão Repository Pattern estabelecido. Todos os testes cobrindo F009 passando.
 <!-- FEATURES_CONTEXT_END -->
 
 ## Convencoes de Nomenclatura

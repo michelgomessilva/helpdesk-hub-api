@@ -13,9 +13,9 @@ Construir uma API backend para abertura e gestao de chamados internos de suporte
 
 ## Como executar
 
-```powershell
+```bash
 uv sync
-uv run uvicorn helpdesk_hub_api.main:app --reload
+uv run uvicorn main:app --reload
 ```
 
 A aplicacao sera iniciada em `http://127.0.0.1:8000`.
@@ -31,7 +31,7 @@ Documentacao interativa:
 
 ## Testes
 
-```powershell
+```bash
 uv run pytest
 ```
 
@@ -73,16 +73,58 @@ Veja `docs/spec-driven-development.md` para o guia completo de desenvolvimento.
 - `docs/features/` - Especificações detalhadas de cada feature
 - `CLAUDE.md` - Instruções para desenvolvimento com Claude Code
 
-## Estrutura inicial
+## Arquitetura
+
+O projeto segue **Clean Architecture** com 4 camadas claramente separadas:
 
 ```text
 src/
-├── main.py              # FastAPI app factory
-├── api/                 # HTTP layer (routes, schemas)
-├── domain/              # Domain entities and enums
-├── application/         # Use cases (planned)
-└── infrastructure/      # Database, external services (planned)
+├── main.py                       # FastAPI app factory
+├── api/                          # HTTP layer (routes, schemas)
+│   ├── routes/
+│   │   ├── system.py            # GET / e GET /health
+│   │   └── tickets.py           # Endpoints de tickets
+│   └── schemas/
+│       ├── system.py            # HealthResponse, RootResponse
+│       └── tickets.py           # TicketCreate, TicketResponse (Pydantic DTOs)
+├── domain/                       # Domain layer (entities, enums, contracts)
+│   ├── entities/
+│   │   └── ticket.py            # Ticket dataclass (domínio puro)
+│   ├── enums/
+│   │   └── ticket.py            # TicketStatus, TicketPriority, TicketCategory
+│   └── repositories/
+│       └── ticket.py            # TicketRepository (ABC - contrato)
+├── application/                  # Application layer (mediatr/CQRS)
+│   └── tickets/
+│       ├── commands/
+│       │   └── create_ticket.py # CreateTicketCommand + CreateTicketHandler
+│       └── queries/
+│           └── list_tickets.py  # ListTicketsQuery + ListTicketsHandler
+└── infrastructure/               # Infrastructure layer (implementações concretas)
+    └── repositories/
+        └── ticket.py            # InMemoryTicketRepository
 
-tests/                   # Test suite (TDD-driven)
-docs/                    # Documentation and feature specs
+tests/                            # Test suite (TDD-driven)
+docs/                             # Documentation and feature specs
 ```
+
+### Descrição das camadas
+
+- **API Layer** (`api/`): Responsável pela comunicação HTTP. Rotas delegam para o `application/` (mediatr). Schemas definem contracts Pydantic para request/response.
+
+- **Domain Layer** (`domain/`): Lógica de negócio pura. Entities como dataclasses, enums imutáveis, e **ABCs (interfaces)** para Repository que definem contratos.
+
+- **Application Layer** (`application/`): Casos de uso implementados via **mediatr** (padrão CQRS). **Commands** para escrita, **Queries** para leitura. Organização por feature (Vertical Slice). Handlers orquestram o repositório e domínio.
+
+- **Infrastructure Layer** (`infrastructure/`): Implementações concretas de repositórios e serviços externos. Hoje: `InMemoryTicketRepository`. Futuro: `PostgresTicketRepository`, cache, etc.
+
+### Padrão: mediatr / CQRS
+
+O projeto adota o padrão **mediatr** (port Python do MediatR do C#) para desacoplar rotas FastAPI da lógica de negócio:
+
+- **Commands** (`application/<feature>/commands/`): Operações de escrita (create, update, delete)
+- **Queries** (`application/<feature>/queries/`): Operações de leitura (list, get by id)
+- **Handlers**: Recebi o repositório via injeção, orquestram domínio e infraestrutura
+- **Rotas FastAPI**: Apenas delegam para o Mediator — nunca contêm lógica
+
+Isto facilita testes, reutilização e evolução para autenticação, auditoria e permissões.

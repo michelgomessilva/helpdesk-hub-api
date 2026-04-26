@@ -21,4 +21,4 @@ def test_readme_contains_local_run_instructions() -> None:
 
     assert "## Como executar" in content
     assert "uv sync" in content
-    assert "uv run uvicorn helpdesk_hub_api.main:app --reload" in content
+    assert "uv run uvicorn main:app --reload" in content
