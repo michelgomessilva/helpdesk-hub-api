@@ -1,4 +1,5 @@
 from datetime import datetime
+from uuid import UUID
 
 from pydantic import BaseModel, Field
 
@@ -14,7 +15,8 @@ class TicketCreate(BaseModel):
 
 
 class TicketResponse(BaseModel):
-    id: int
+    id: UUID
+    number: int
     title: str
     description: str
     category: TicketCategory

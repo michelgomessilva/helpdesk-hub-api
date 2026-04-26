@@ -220,9 +220,6 @@ Se uma feature estiver muito grande, quebre por fluxo, por agregado de dominio o
 Atualize esta lista sempre que uma nova feature for iniciada.
 
 <!-- FEATURES_INDEX_START -->
-
-| ID   | Feature                                         | Status | Origem    | Documento                                             |
-| ---- | ----------------------------------------------- | ------ | --------- | ----------------------------------------------------- |
 | F000 | Exemplo inicial                                 | Draft  | Manual    | `docs/features/f000-exemplo-inicial.md`               |
 | F001 | Configurar estrutura inicial com uv             | Done   | GitHub #1 | `docs/features/f001-setup-initial-api.md`             |
 | F002 | Instalar FastAPI, Uvicorn e Pydantic            | Done   | GitHub #2 | `docs/features/f002-instalar-fastapi-uvicorn-pydantic.md` |
@@ -232,7 +229,8 @@ Atualize esta lista sempre que uma nova feature for iniciada.
 | F006 | Criar README inicial do projeto                 | Done   | GitHub #6 | `docs/features/f006-create-readme.md`                 |
 | F007 | Criar enums de status e prioridade              | Done   | GitHub #7 | `docs/features/f007-create-enums-status-priority.md`  |
 | F008 | Criar schema de Ticket                          | Done   | GitHub #9 | `docs/features/f008-create-schema-ticket.md`          |
-
+| F009 | Criar armazenamento em memória para tickets | Draft | GitHub #11 | `docs/features/f009-create-storage-inmemory-tickets.md` |
+| ID   | Feature                                         | Status | Origem    | Documento                                             |
 <!-- FEATURES_INDEX_END -->
 
 ## Contexto das Features
@@ -311,6 +309,14 @@ Resumo curto das features registradas para facilitar navegacao, rastreabilidade 
 - Documento: `docs/features/f008-create-schema-ticket.md`
 - Labels: `feature`, `tickets`, `priority: high`, `week-2`
 - Resumo: Schemas TicketCreate e TicketResponse implementados com validacao de titulo, descricao, categoria, status e prioridade, cobertos por TDD.
+
+### F009 - Criar armazenamento em memória para tickets
+
+- Status: `Draft`
+- Origem: `GitHub #11`
+- Documento: `docs/features/f009-create-storage-inmemory-tickets.md`
+- Labels: `feature`, `tickets`, `priority: high`, `week-2`
+- Resumo: ## Contexto Criar estrutura temporária em memória para armazenar tickets. ## O que deve ser feito - [ ] Definir lista ou dicionário de tickets - [ ] Garantir geração simples de ids ## Critérios de aceite - [ ] Tickets...
 <!-- FEATURES_CONTEXT_END -->
 
 ## Convencoes de Nomenclatura
@@ -575,3 +581,4 @@ O contexto acima foi consolidado a partir do arquivo `Projeto HelpDesk Hub API -
 ## Observacoes Finais
 
 O objetivo desta estrutura nao e burocracia. A ideia e criar um sistema leve, repetivel e rastreavel para construir o projeto do inicio ao fim com mais clareza.
+

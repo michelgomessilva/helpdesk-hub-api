@@ -1,4 +1,5 @@
 from datetime import datetime
+from uuid import uuid4
 
 from pydantic import ValidationError
 
@@ -80,8 +81,10 @@ def test_ticket_create_rejects_blank_title() -> None:
 
 
 def test_ticket_response_exposes_consistent_contract() -> None:
+    ticket_id = uuid4()
     ticket = TicketResponse(
-        id=1,
+        id=ticket_id,
+        number=1,
         title="Printer not working",
         description="The office printer stopped responding.",
         category="hardware",
@@ -90,7 +93,8 @@ def test_ticket_response_exposes_consistent_contract() -> None:
         created_at=datetime(2026, 4, 5, 22, 0, 0),
     )
 
-    assert ticket.id == 1
+    assert ticket.id == ticket_id
+    assert ticket.number == 1
     assert ticket.category.value == "hardware"
     assert ticket.status.value == "open"
     assert ticket.priority.value == "high"
